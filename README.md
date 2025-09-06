@@ -20,7 +20,7 @@ The frontend interface allows users to analyze and visualize the data with chart
 
 
 ## Scrumb Board
-https://github.com/users/blessiingab/projects/1/views/1
+
 
  ## Architecture Diagram
 [View on Draw.io](https://app.diagrams.net/#G1DS-VaUmfjWL8Zuxx2-JZYDlryqKzC5PP#%7B"pageId"%3A"ed_Eie-8lNssMi18Xb6K"%7D)

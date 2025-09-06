@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Momo Dashboard</title>
+    <link rel="stylesheet" href="web/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Momo Dashboard</h2>
+        <a href="Dashboard.html">Dashboard</a>
+        <a href="#">Transactions</a>
+        <a href="Analytics.html">Analytics</a>
+        <a href="settings.html">Settings</a>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Transactions Dashboard</h1>
+        </header>
+
+        <div class="summary-cards">
+            <div class="card">
+                <h3>Total Transactions</h3>
+                <p id="totalTransactions">0</p>
+            </div>
+            <div class="card">
+                <h3>Total Amount</h3>
+                <p id="totalAmount">0</p>
+            </div>
+            <div class="card">
+                <h3>High Value TX</h3>
+                <p id="highValueCount">0</p>
+            </div>
+        </div>
+
+        <div class="filters">
+            <label for="categoryFilter">Category:</label>
+            <select id="categoryFilter">
+                <option value="all">All</option>
+                <option value="High Value">High Value</option>
+                <option value="Medium Value">Medium Value</option>
+                <option value="Low Value">Low Value</option>
+            </select>
+
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate">
+
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate">
+
+            <button id="applyFilter">Apply</button>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="transactionChart"></canvas>
+        </div>
+
+        <div class="table-container">
+            <table id="transactionsTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Phone</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script src="web/chart_handler.js"></script>
+</html>

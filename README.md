@@ -14,9 +14,9 @@ The frontend interface allows users to analyze and visualize the data with chart
 - Optional API: FastAPI endpoints to serve transaction and analytics data
 
 ## Team Members
- Blessing Ingabire – [blessiingab]
- Tabitha Dorcas Akimana – [tdorcas-akim]  
- Adoleh Samuel – [AdolehSamuel]
+- Blessing Ingabire – [blessiingab](https://github.com/blessiingab)
+- Tabitha Dorcas Akimana – [tdorcas-akim](https://github.com/tdorcas-akim)
+- Adoleh Samuel – [AdolehSamuel](https://github.com/AdolehSamuel)
 
 
 ## Scrumb Board

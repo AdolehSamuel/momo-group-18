@@ -1,49 +1,41 @@
 # MoMo Analytics
 
-**GROUP 8**
+GROUP 8
 
 Process, analyze, and visualize Mobile Money (MoMo) SMS data end‑to‑end. This project ingests XML exports of SMS, cleans and categorizes transactions, loads them into a relational database (SQLite for now), and powers a lightweight analytics dashboard for insights.
 
-> **Why this exists**
->
-> * MoMo users receive rich transactional data via SMS, but it’s hard to analyze.
-> * This tool turns raw SMS XML into structured tables and interactive charts.
 
----
+✨ Key Features
 
-## ✨ Key Features
-
-* **ETL Pipeline**: Parse XML → Clean & Normalize → Categorize → Load to DB
-* **Relational Storage (SQLite)**: Durable, queryable transaction history
-* **Analytics-Ready Outputs**: Aggregations for charts, KPIs, and tables
-* **Simple Frontend Dashboard**: HTML/CSS/JS visualizations
-* **Optional API (FastAPI)**: Serve transactions and analytics programmatically
-* **Environment-Driven Config**: Reproducible runs across machines
-
----
-
-## 🧭 Architecture Diagram
+ETL Pipeline: Parse XML → Clean & Normalize → Categorize → Load to DB
+Relational Storage (SQLite): Durable, queryable transaction history
+Analytics-Ready Outputs: Aggregations for charts, KPIs, and tables
+Simple Frontend Dashboard: HTML/CSS/JS visualizations
+Optional API (FastAPI): Serve transactions and analytics programmatically
+Environment-Driven Config: Reproducible runs across machines
 
 
-View on Draw.io
+🧭 Architecture Diagram
 
-## 🧱 Scrum Board
+   https://app.diagrams.net/#G1DS-VaUmfjWL8Zuxx2-JZYDlryqKzC5PP#%7B%22pageId%22%3A%22ed_Eie-8lNssMi18Xb6K%22%7D
+
+ 🧱 Scrum Board
 
 
 
-## 🧰 Tech Stack
+ 🧰 Tech Stack
 
-* **Language**: Python 3.x
-* **ETL**: Standard library + lxml (or ElementTree), Pandas (optional), custom cleaners
-* **Database**: SQLite (dev). Ready to swap to Postgres later
-* **API (optional)**: FastAPI + Uvicorn
-* **Frontend**: HTML, CSS, vanilla JS (Chart.js or similar)
-* **Config**: `.env` with environment variables
-* **Testing**: `pytest`
+  Language: Python 3.x
+  ETL: Standard library + lxml (or ElementTree), Pandas (optional), custom cleaners
+  Database: SQLite (dev). Ready to swap to Postgres later
+  API (optional): FastAPI + Uvicorn
+  Frontend: HTML, CSS, vanilla JS (Chart.js or similar)
+  Config: .env with environment variables
+  Testing: pytest
 
----
 
-## 📁 Project Structure (Planned)
+
+📁 Project Structure (Planned)
 
 ```
 ├── README.md
@@ -82,16 +74,16 @@ View on Draw.io
 
 ---
 
-## ⚙️ Installation
+⚙️ Installation
 
-### 1) Clone
+ 1) Clone
 
 ```bash
 git clone <your-repo-url>
 cd momo-analytics
 ```
 
-### 2) Create & activate virtual environment
+ 2) Create & activate virtual environment
 
 ```bash
 python3 -m venv venv
@@ -122,27 +114,27 @@ API_PORT=8000
 
 ---
 
-## 🚚 ETL Pipeline
+🚚 ETL Pipeline
 
-**Entry point**: `etl/run.py`
+Entry point: `etl/run.py`
 
-1. **Parse XML** (`etl/parse_xml.py`)
+1. Parse XML (`etl/parse_xml.py`)
 
-   * Read SMS export(s) in XML
-   * Extract timestamp, amount, counterparty, reference, message
-2. **Clean & Normalize** (`etl/clean_normalize.py`)
+    Read SMS export(s) in XML
+    Extract timestamp, amount, counterparty, reference, message
+2. Clean & Normalize (`etl/clean_normalize.py`)
 
    * Standardize dates, currency, amounts, phone formats
    * Normalize message templates; handle duplicates
-3. **Categorize** (`etl/categorize.py`)
+3. Categorize (`etl/categorize.py`)
 
    * Rules/regex to label transactions: *cash-in, cash-out, transfer, merchant, fees, reversal, airtime, bill pay*, etc.
-4. **Load DB** (`etl/load_db.py`)
+4. Load DB (`etl/load_db.py`)
 
    * Create/upgrade tables; load normalized rows
    * Generate summary tables / materialized views (daily totals, by category, top counterparties)
 
-**Run**:
+Run:
 
 ```bash
 python -m etl.run
@@ -162,25 +154,25 @@ Outputs:
 
 ---
 
-## 🗄️ Database (SQLite)
+ 🗄️ Database (SQLite)
 
 Suggested tables (simplified):
 
-**transactions**
+transactions
 
 * `id` (PK), `timestamp`, `direction` (in/out), `amount`, `currency`, `category`, `counterparty`, `reference`, `message_hash` (for dedupe), `raw_id`
 
-**raw\_messages**
+raw\_messages
 
 * `raw_id` (PK), `received_at`, `sender`, `body`, `source_file`
 
-**aggregates\_daily**
+aggregates\_daily
 
 * `date`, `total_in`, `total_out`, `net`, `txn_count`
 
 ---
 
-## 🧪 Testing
+🧪 Testing
 
 Run unit tests for core stages:
 
@@ -188,17 +180,16 @@ Run unit tests for core stages:
 pytest -q
 ```
 
-* `test_parse_xml.py`: parsing correctness, sample fixtures
-* `test_clean_normalize.py`: amount/date normalization, dedupe
-* `test_categorize.py`: rules classification coverage
+ `test_parse_xml.py`: parsing correctness, sample fixtures
+ `test_clean_normalize.py`: amount/date normalization, dedupe
+ `test_categorize.py`: rules classification coverage
 
 ---
 
-## 🌐 Optional API (FastAPI)
+🌐 Optional API (FastAPI)
 
 Serve data to the dashboard or 3rd‑party tools.
-
-**Run API:**
+Run API:
 
 ```bash
 uvicorn api.app:app --host ${API_HOST:-0.0.0.0} --port ${API_PORT:-8000} --reload
@@ -215,7 +206,7 @@ uvicorn api.app:app --host ${API_HOST:-0.0.0.0} --port ${API_PORT:-8000} --reloa
 
 ---
 
-## 🖥️ Frontend Dashboard
+ 🖥️ Frontend Dashboard
 
 A static dashboard reads API JSON (or local JSON files exported from ETL) and visualizes time series, category breakdowns, and top entities.
 
@@ -239,7 +230,7 @@ Open `index.html` in your browser. Core assets:
 
 ---
 
-## 🧵 Usage Workflow
+ 🧵 Usage Workflow
 
 1. Export MoMo SMS as **XML** (e.g., from your device/backup tool), place files in `data/raw/`.
 2. Configure `.env` paths if needed.
@@ -249,7 +240,7 @@ Open `index.html` in your browser. Core assets:
 
 ---
 
-## 🛡️ Data & Security Notes
+🛡️ Data & Security Notes
 
 * Treat MoMo data as **sensitive**. Do not commit real SMS/XML or DB files.
 * `.gitignore` should exclude `data/raw/`, `data/db.sqlite3` and any secrets.
@@ -257,7 +248,7 @@ Open `index.html` in your browser. Core assets:
 
 ---
 
-## 🔧 Scripts
+🔧 Scripts
 
 * `scripts/run_etl.sh` – run the ETL end‑to‑end
 * `scripts/export_json.sh` – export selected tables to JSON for the frontend
@@ -265,7 +256,7 @@ Open `index.html` in your browser. Core assets:
 
 ---
 
-## 🧾 Requirements
+ 🧾 Requirements
 
 * Python 3.x
 * lxml (or ElementTree), fastapi+uvicorn (optional), pandas (optional), pytest
@@ -275,7 +266,7 @@ See `requirements.txt` for exact versions.
 
 ---
 
-## 🧑‍💻 Contributors
+ 🧑‍💻 Contributors
 
 * **Blessing Ingabire** – `blessiingab`
 * **Tabitha Dorcas Akimana** – `tdorcas-akim`

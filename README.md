@@ -21,8 +21,11 @@ Environment-Driven Config: Reproducible runs across machines
    <img width="190" height="519" alt="image" src="https://github.com/user-attachments/assets/de797767-ae43-41ac-b71a-74cf47d3f76e" />
 
 
- 🧱 Scrum Board
 
+ 🧱 Scrum Board
+ 
+
+https://github.com/users/tdorcas-akim/projects/1
 
 
  🧰 Tech Stack

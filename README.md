@@ -24,26 +24,12 @@ Process, analyze, and visualize Mobile Money (MoMo) SMS data end‑to‑end. Thi
 
 ## 🧭 Architecture Diagram
 
-**View on Draw\.io**
-(Keep using your existing Draw\.io diagram link or file. Add/update the link here.)
 
-```
-[XML SMS Exports] → [ETL: parse → clean → categorize] → [SQLite DB]
-                                                ↘
-                                            [Aggregations / Views] → [API (FastAPI)] → [Frontend Dashboard]
-```
-
----
+View on Draw.io
 
 ## 🧱 Scrum Board
 
-Keep your Scrum board as-is (Do/Doing/Done). Add the live link or screenshot here. Suggested columns:
 
-* **Backlog** → **To Do** → **In Progress** → **Review/QA** → **Done**
-
-Include issues for: XML parsing edge cases, category rules, DB schema evolution, API endpoints, chart designs, test coverage, CI.
-
----
 
 ## 🧰 Tech Stack
 

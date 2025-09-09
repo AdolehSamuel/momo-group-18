@@ -5,7 +5,7 @@ GROUP 8
 Process, analyze, and visualize Mobile Money (MoMo) SMS data end‑to‑end. This project ingests XML exports of SMS, cleans and categorizes transactions, loads them into a relational database (SQLite for now), and powers a lightweight analytics dashboard for insights.
 
 
-✨ Key Features
+ Key Features
 
 ETL Pipeline: Parse XML → Clean & Normalize → Categorize → Load to DB
 Relational Storage (SQLite): Durable, queryable transaction history
@@ -16,19 +16,19 @@ Environment-Driven Config: Reproducible runs across machines
 
 
 
-🧭 Architecture Diagram
+ Architecture Diagram
 
 
    <img width="190" height="519" alt="image" src="https://github.com/user-attachments/assets/de797767-ae43-41ac-b71a-74cf47d3f76e" />
 
 
 
- 🧱 Scrum Board
+  Scrum Board
  
+https://github.com/users/tdorcas-akim/projects/1
 
 
-
- 🧰 Tech Stack
+  Tech Stack
 
   Language: Python 3.x
   ETL: Standard library + lxml (or ElementTree), Pandas (optional), custom cleaners
@@ -40,7 +40,7 @@ Environment-Driven Config: Reproducible runs across machines
 
 
 
-📁 Project Structure (Planned)
+ Project Structure (Planned)
 
 ```
 ├── README.md
@@ -79,7 +79,7 @@ Environment-Driven Config: Reproducible runs across machines
 
 ---
 
-⚙️ Installation
+ Installation
 
  1) Clone
 
@@ -119,7 +119,7 @@ API_PORT=8000
 
 ---
 
-🚚 ETL Pipeline
+ ETL Pipeline
 
 Entry point: `etl/run.py`
 
@@ -159,7 +159,7 @@ Outputs:
 
 ---
 
- 🗄️ Database (SQLite)
+  Database (SQLite)
 
 Suggested tables (simplified):
 
@@ -177,7 +177,7 @@ aggregates\_daily
 
 ---
 
-🧪 Testing
+ Testing
 
 Run unit tests for core stages:
 
@@ -191,7 +191,7 @@ pytest -q
 
 ---
 
-🌐 Optional API (FastAPI)
+ Optional API (FastAPI)
 
 Serve data to the dashboard or 3rd‑party tools.
 Run API:
@@ -211,7 +211,7 @@ uvicorn api.app:app --host ${API_HOST:-0.0.0.0} --port ${API_PORT:-8000} --reloa
 
 ---
 
- 🖥️ Frontend Dashboard
+  Frontend Dashboard
 
 A static dashboard reads API JSON (or local JSON files exported from ETL) and visualizes time series, category breakdowns, and top entities.
 
@@ -235,7 +235,7 @@ Open `index.html` in your browser. Core assets:
 
 ---
 
- 🧵 Usage Workflow
+  Usage Workflow
 
 1. Export MoMo SMS as **XML** (e.g., from your device/backup tool), place files in `data/raw/`.
 2. Configure `.env` paths if needed.
@@ -253,7 +253,7 @@ Open `index.html` in your browser. Core assets:
 
 ---
 
-🔧 Scripts
+ Scripts
 
 * `scripts/run_etl.sh` – run the ETL end‑to‑end
 * `scripts/export_json.sh` – export selected tables to JSON for the frontend
@@ -261,7 +261,7 @@ Open `index.html` in your browser. Core assets:
 
 ---
 
- 🧾 Requirements
+  Requirements
 
 * Python 3.x
 * lxml (or ElementTree), fastapi+uvicorn (optional), pandas (optional), pytest
@@ -271,7 +271,7 @@ See `requirements.txt` for exact versions.
 
 ---
 
- 🧑‍💻 Contributors
+ Contributors
 
 * **Blessing Ingabire** – `blessiingab`
 * **Tabitha Dorcas Akimana** – `tdorcas-akim`

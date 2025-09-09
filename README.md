@@ -31,7 +31,7 @@ Process, analyze, and visualize **Mobile Money (MoMo) SMS data** end-to-end. Thi
 
 **Scrum Board** - 
 
-[GitHub Projects](https://github.com/users/tdorcas-akim/projects/1)  
+[GitHub Projects](https://github.com/users/AdolehSamuel/projects/1/views/1?layout=board)  
 
 ---
 

@@ -27,7 +27,7 @@ Process, analyze, and visualize **Mobile Money (MoMo) SMS data** end-to-end. Thi
 
 **System Diagram** - 
 
-[High-Level System Architecture](https://drive.google.com/file/d/11vWZI0adX_xhK5yFidRbc_ZlMbNj6740/view?usp=sharing)  
+[High-Level System Architecture](https://drive.google.com/file/d/1pSbZjMMmSFaWmH_uyw1qczj8WgIJIc_J/view?usp=sharing)  
 
 **Scrum Board** - 
 

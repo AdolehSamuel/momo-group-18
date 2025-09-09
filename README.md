@@ -1,46 +1,55 @@
-# MoMo Analytics
+# MoMo Analytics – Group 18  
 
-GROUP 8
+Process, analyze, and visualize **Mobile Money (MoMo) SMS data** end-to-end. This project ingests XML exports of SMS, cleans and categorizes transactions, stores them in a relational database (SQLite), and powers a lightweight analytics dashboard for insights.  
 
-Process, analyze, and visualize Mobile Money (MoMo) SMS data end‑to‑end. This project ingests XML exports of SMS, cleans and categorizes transactions, loads them into a relational database (SQLite for now), and powers a lightweight analytics dashboard for insights.
+---
 
+##  Contributors  
 
- Key Features
+- **Blessing Ingabire** – [blessiingab](https://github.com/blessiingab)  
+- **Tabitha Dorcas Akimana** – [tdorcas-akim](https://github.com/tdorcas-akim)  
+- **Adoleh Samuel** – [AdolehSamuel](https://github.com/AdolehSamuel)
 
-ETL Pipeline: Parse XML → Clean & Normalize → Categorize → Load to DB
-Relational Storage (SQLite): Durable, queryable transaction history
-Analytics-Ready Outputs: Aggregations for charts, KPIs, and tables
-Simple Frontend Dashboard: HTML/CSS/JS visualizations
-Optional API (FastAPI): Serve transactions and analytics programmatically
-Environment-Driven Config: Reproducible runs across machines
+---
 
+## Key Features  
 
+- **ETL Pipeline**: Parse XML → Clean & Normalize → Categorize → Load to DB  
+- **Relational Storage**: SQLite for durable, queryable transaction history  
+- **Analytics-Ready Outputs**: Aggregations for charts, KPIs, and tables  
+- **Frontend Dashboard**: HTML/CSS/JS visualizations for insights  
+- **Optional API (FastAPI)**: Serve transactions and analytics programmatically  
+- **Environment-Driven Config**: Reproducible runs across machines  
 
- Architecture Diagram
+---
 
+## Architecture  
 
-   <img width="190" height="519" alt="image" src="https://github.com/user-attachments/assets/de797767-ae43-41ac-b71a-74cf47d3f76e" />
+**System Diagram** - 
 
+[High-Level System Architecture](https://drive.google.com/file/d/11vWZI0adX_xhK5yFidRbc_ZlMbNj6740/view?usp=sharing)  
 
+**Scrum Board** - 
 
+[GitHub Projects](https://github.com/users/tdorcas-akim/projects/1)  
 
-  Scrum Board 
+---
 
-https://github.com/users/tdorcas-akim/projects/1
+## Tech Stack  
 
-  Tech Stack
+| Component     | Technology                           |
+|---------------|--------------------------------------|
+| Language       | Python 3.x                            |
+| ETL            | Standard library + lxml / ElementTree, Pandas (optional) |
+| Database       | SQLite (dev) → Postgres (future)      |
+| API (Optional) | FastAPI + Uvicorn                    |
+| Frontend        | HTML, CSS, JS (Chart.js or similar)  |
+| Config          | `.env` for environment variables     |
+| Testing         | pytest                               |
 
-  Language: Python 3.x
-  ETL: Standard library + lxml (or ElementTree), Pandas (optional), custom cleaners
-  Database: SQLite (dev). Ready to swap to Postgres later
-  API (optional): FastAPI + Uvicorn
-  Frontend: HTML, CSS, vanilla JS (Chart.js or similar)
-  Config: .env with environment variables
-  Testing: pytest
+---
 
-
-
- Project Structure (Planned)
+## Planned Project Structure  
 
 ```
 ├── README.md
@@ -79,203 +88,137 @@ https://github.com/users/tdorcas-akim/projects/1
 
 ---
 
- Installation
-
- 1) Clone
+## Installation  
 
 ```bash
-git clone <your-repo-url>
-cd momo-analytics
-```
+# 1. Clone repository
+git clone https://github.com/AdolehSamuel/momo-group-18.git
+cd momo-group-18
 
- 2) Create & activate virtual environment
-
-```bash
+# 2. Create & activate virtual environment
 python3 -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
-```
+source venv/bin/activate
 
-### 3) Install dependencies
+# Windows: venv\Scripts\activate
 
-```bash
+# 3. Install dependencies
 pip install -r requirements.txt
+
+# 4. Setup environment variables
+cp .env.example .env
 ```
 
-### 4) Environment variables
-
-Create a `.env` file (use `.env.example` as a guide). Example values:
-
+Example `.env` values:
 ```
-# ETL
-RAW_XML_DIR=./data/raw
-PROCESSED_DIR=./data/processed
-DB_PATH=./data/db.sqlite3
-LOG_DIR=./data/logs
-
-# API (optional)
-API_HOST=0.0.0.0
-API_PORT=8000
+DATABASE_URL=********
 ```
 
 ---
 
- ETL Pipeline
+## ETL Pipeline  
 
-Entry point: `etl/run.py`
+**Entry point**: `etl/run.py`  
 
-1. Parse XML (`etl/parse_xml.py`)
-
-    Read SMS export(s) in XML
-    Extract timestamp, amount, counterparty, reference, message
-2. Clean & Normalize (`etl/clean_normalize.py`)
-
-   * Standardize dates, currency, amounts, phone formats
-   * Normalize message templates; handle duplicates
-3. Categorize (`etl/categorize.py`)
-
-   * Rules/regex to label transactions: *cash-in, cash-out, transfer, merchant, fees, reversal, airtime, bill pay*, etc.
-4. Load DB (`etl/load_db.py`)
-
-   * Create/upgrade tables; load normalized rows
-   * Generate summary tables / materialized views (daily totals, by category, top counterparties)
+Stages:  
+1. **Parse XML** → Extract timestamp, amount, counterparty, reference, message  
+2. **Clean & Normalize** → Standardize dates, currency, amounts, phone formats  
+3. **Categorize** → Apply rules/regex for *cash-in, cash-out, transfer, merchant, fees,* etc.  
+4. **Load DB** → Create tables, insert transactions, generate summary tables  
 
 Run:
-
 ```bash
 python -m etl.run
-```
-
-Or with helper script:
-
-```bash
+# or
 bash scripts/run_etl.sh
 ```
 
-Outputs:
-
-* `data/db.sqlite3` – relational store
-* `data/processed/` – cleaned CSV/JSON exports (optional)
-* `data/logs/` – run logs
-
----
-
-  Database (SQLite)
-
-Suggested tables (simplified):
-
-transactions
-
-* `id` (PK), `timestamp`, `direction` (in/out), `amount`, `currency`, `category`, `counterparty`, `reference`, `message_hash` (for dedupe), `raw_id`
-
-raw\_messages
-
-* `raw_id` (PK), `received_at`, `sender`, `body`, `source_file`
-
-aggregates\_daily
-
-* `date`, `total_in`, `total_out`, `net`, `txn_count`
+Outputs:  
+- `data/db.sqlite3` – database  
+- `data/processed/` – cleaned CSV/JSON exports  
+- `data/logs/` – ETL logs & errors  
 
 ---
 
- Testing
+## Database Schema (Simplified)  
 
-Run unit tests for core stages:
+**transactions**  
+`id | timestamp | direction | amount | currency | category | counterparty | reference | message_hash | raw_id`  
+
+**raw_messages**  
+`raw_id | received_at | sender | body | source_file`  
+
+**aggregates_daily**  
+`date | total_in | total_out | net | txn_count`  
+
+---
+
+## Testing  
 
 ```bash
 pytest -q
 ```
 
- `test_parse_xml.py`: parsing correctness, sample fixtures
- `test_clean_normalize.py`: amount/date normalization, dedupe
- `test_categorize.py`: rules classification coverage
+Covers:  
+- `test_parse_xml.py` → XML parsing correctness  
+- `test_clean_normalize.py` → data normalization, dedupe logic  
+- `test_categorize.py` → category classification rules  
 
 ---
 
- Optional API (FastAPI)
+## API (FastAPI)  
 
-Serve data to the dashboard or 3rd‑party tools.
-Run API:
-
+Run:  
 ```bash
 uvicorn api.app:app --host ${API_HOST:-0.0.0.0} --port ${API_PORT:-8000} --reload
 ```
 
-**Example endpoints** (planned):
-
-* `GET /health` – service check
-* `GET /transactions?limit=...&category=...`
-* `GET /analytics/daily` – time series
-* `GET /analytics/categories` – distribution by category
-
-`api/schemas.py` documents response models.
+Planned endpoints:  
+- `GET /health` → Health check  
+- `GET /transactions` → Query transactions  
+- `GET /analytics/daily` → Daily time series  
+- `GET /analytics/categories` → Category breakdown  
 
 ---
 
-  Frontend Dashboard
+## Frontend Dashboard  
 
-A static dashboard reads API JSON (or local JSON files exported from ETL) and visualizes time series, category breakdowns, and top entities.
+Static HTML/JS dashboard for visualizing analytics.  
 
-**Serve locally:**
-
+Serve locally:  
 ```bash
 bash scripts/serve_frontend.sh
 ```
+Open `index.html` in browser.  
 
-Open `index.html` in your browser. Core assets:
-
-* `web/styles.css`
-* `web/chart_handler.js`
-
-**Charts & Tables**
-
-* Daily totals (line chart)
-* In vs Out vs Fees (stacked bars)
-* Category distribution (doughnut/pie)
-* Top counterparties (table)
+Charts:  
+- Daily totals (line chart)  
+- In vs Out vs Fees (stacked bar)  
+- Category distribution (doughnut/pie)  
+- Top counterparties (table)  
 
 ---
 
-  Usage Workflow
+## Data & Security  
 
-1. Export MoMo SMS as **XML** (e.g., from your device/backup tool), place files in `data/raw/`.
-2. Configure `.env` paths if needed.
-3. Run ETL to populate `db.sqlite3`.
-4. Start **API** (optional).
-5. Open the **dashboard** to explore insights.
+- Treat MoMo data as **sensitive**: never commit raw XML or DB files  
+- Use `.gitignore` for `data/raw/`, `data/db.sqlite3`, and secrets  
+- Consider anonymization for demos  
 
 ---
 
-🛡️ Data & Security Notes
+## Scripts  
 
-* Treat MoMo data as **sensitive**. Do not commit real SMS/XML or DB files.
-* `.gitignore` should exclude `data/raw/`, `data/db.sqlite3` and any secrets.
-* Consider anonymization (hashing phone numbers) for demos.
-
----
-
- Scripts
-
-* `scripts/run_etl.sh` – run the ETL end‑to‑end
-* `scripts/export_json.sh` – export selected tables to JSON for the frontend
-* `scripts/serve_frontend.sh` – quick local static server
+- `run_etl.sh` → Full ETL pipeline  
+- `export_json.sh` → Export DB tables to JSON  
+- `serve_frontend.sh` → Local static server  
 
 ---
 
-  Requirements
+## Requirements  
 
-* Python 3.x
-* lxml (or ElementTree), fastapi+uvicorn (optional), pandas (optional), pytest
-* SQLite (bundled with Python)
-
-See `requirements.txt` for exact versions.
-
----
-
- Contributors
-
-* **Blessing Ingabire** – `blessiingab`
-* **Tabitha Dorcas Akimana** – `tdorcas-akim`
-* **Adoleh Samuel** – `AdolehSamuel`
-
-
-
+- Python 3.x  
+- lxml / ElementTree  
+- fastapi + uvicorn (optional)  
+- pandas (optional)  
+- pytest  
+- SQLite (built-in)

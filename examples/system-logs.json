@@ -1,0 +1,42 @@
+[
+    {
+        "log_id": 1,
+        "transaction_id": 1,
+        "log_type": "INFO",
+        "log_timestamp": "2025-09-19T12:05:00Z",
+        "sms_address": "1234567890",
+        "message": "Transaction ok"
+    },
+    {
+        "log_id": 2,
+        "transaction_id": 2,
+        "log_type": "WARNING",
+        "log_timestamp": "2025-09-19T12:06:00Z",
+        "sms_address": "2345678901",
+        "message": "Delayed"
+    },
+    {
+        "log_id": 3,
+        "transaction_id": 3,
+        "log_type": "ERROR",
+        "log_timestamp": "2025-09-19T12:07:00Z",
+        "sms_address": "3456789012",
+        "message": "Failed"
+    },
+    {
+        "log_id": 4,
+        "transaction_id": 4,
+        "log_type": "INFO",
+        "log_timestamp": "2025-09-19T12:08:00Z",
+        "sms_address": "4567890123",
+        "message": "Completed"
+    },
+    {
+        "log_id": 5,
+        "transaction_id": 5,
+        "log_type": "INFO",
+        "log_timestamp": "2025-09-19T12:09:00Z",
+        "sms_address": "5678901234",
+        "message": "Processed"
+    }
+]

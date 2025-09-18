@@ -1,0 +1,43 @@
+{
+    "transaction_id": 1,
+    "amount": 100.50,
+    "currency": "USD",
+    "transaction_date": "2025-09-19T12:00:00Z",
+    "fee": 1.50,
+    "category": {
+        "category_id": 1,
+        "category_name": "Transfer",
+        "description": "Money transfers"
+    },
+    "sender": {
+        "user_id": 2,
+        "name": "Bob",
+        "phone_number": "2345678901"
+    },
+    "receiver": {
+        "user_id": 1,
+        "name": "Alice",
+        "phone_number": "1234567890"
+    },
+    "participants": [
+        {
+            "participant_id": 1,
+            "user_id": 2,
+            "participant_type": "SENDER"
+        },
+        {
+            "participant_id": 2,
+            "user_id": 1,
+            "participant_type": "RECEIVER"
+        }
+    ],
+    "logs": [
+        {
+            "log_id": 1,
+            "log_type": "INFO",
+            "log_timestamp": "2025-09-19T12:05:00Z",
+            "sms_address": "1234567890",
+            "message": "Transaction ok"
+        }
+    ]
+}

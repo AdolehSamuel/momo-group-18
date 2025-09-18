@@ -89,30 +89,100 @@ Process, analyze, and visualize **Mobile Money (MoMo) SMS data** end-to-end. Thi
 
 ---
 
-## Installation  
+## Database Design
+
+The database stores normalized Mobile Money transaction data with proper constraints, indexes, and foreign keys for referential integrity.
+
+### Schema Overview
+
+| Table                      | Purpose                     | Key Columns / Constraints                                     |
+| -------------------------- | --------------------------- | ------------------------------------------------------------- |
+| `users`                    | Mobile money users          | `user_id` (PK), `phone_number`, `name`                        |
+| `transaction_categories`   | Categories for transactions | `category_id` (PK), `category_name`, `description`            |
+| `transactions`             | Core transactions           | `transaction_id` (PK), FK → `users`, `transaction_categories` |
+| `transaction_participants` | Sender/Receiver mapping     | `participant_id` (PK), FK → `transactions`, `users`           |
+| `system_logs`              | Logs for transactions       | `log_id` (PK), FK → `transactions`                            |
+
+### ER Diagram (Simplified)
+
+```
+users (1) ──< transactions >── (1) transaction_categories
+      \                       /
+       \                     /
+        └─< transaction_participants >── system_logs
+```
+
+### Sample Data Inserts
+
+```sql
+INSERT INTO users (phone_number, name) VALUES
+('1234567890', 'Alice'),
+('2345678901', 'Bob'),
+('3456789012', 'Charlie'),
+('4567890123', 'David'),
+('5678901234', 'Eva');
+
+INSERT INTO transaction_categories (category_name, description) VALUES
+('Transfer', 'Money transfers'),
+('Bill', 'Bill payments'),
+('Purchase', 'Goods and services'),
+('Refund', 'Refunds'),
+('Donation', 'Charity donations');
+```
+
+Full insert scripts available in `database_setup.sql`.
+
+### JSON Mapping
+
+Example of a transaction with nested relationships:
+
+```json
+{
+  "transaction_id": 1,
+  "amount": 100.5,
+  "currency": "USD",
+  "transaction_date": "2025-09-19T12:00:00Z",
+  "fee": 1.5,
+  "category": {
+    "category_id": 1,
+    "category_name": "Transfer"
+  },
+  "sender": {
+    "user_id": 2,
+    "name": "Bob"
+  },
+  "receiver": {
+    "user_id": 1,
+    "name": "Alice"
+  },
+  "logs": [{ "log_id": 1, "log_type": "INFO", "message": "Transaction ok" }]
+}
+```
+
+### Testing the Database
 
 ```bash
-# 1. Clone repository
-git clone https://github.com/AdolehSamuel/momo-group-18.git
-cd momo-group-18
-
-# 2. Create & activate virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
-# Windows: venv\Scripts\activate
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Setup environment variables
-cp .env.example .env
+mysql -u root -p
+CREATE DATABASE momo_analytics_group_18;
+USE momo_analytics_group_18;
+SOURCE database_setup.sql;
 ```
 
-Example `.env` values:
+Run CRUD tests:
+
+```sql
+SELECT * FROM transactions;
+INSERT INTO transactions (...) VALUES (...);
+UPDATE transactions SET amount = 200 WHERE transaction_id = 1;
+DELETE FROM transactions WHERE transaction_id = 1;
 ```
-DATABASE_URL=********
-```
+
+### Indexes & Constraints
+
+- **PRIMARY KEYS** on all main tables
+- **FOREIGN KEYS** for relationships
+- **CHECK constraints** for valid ENUM-like values
+- **Indexes** on `transaction_date` and `category_id` for analytics queries
 
 ---
 
@@ -137,19 +207,6 @@ Outputs:
 - `data/db.sqlite3` – database  
 - `data/processed/` – cleaned CSV/JSON exports  
 - `data/logs/` – ETL logs & errors  
-
----
-
-## Database Schema (Simplified)  
-
-**transactions**  
-`id | timestamp | direction | amount | currency | category | counterparty | reference | message_hash | raw_id`  
-
-**raw_messages**  
-`raw_id | received_at | sender | body | source_file`  
-
-**aggregates_daily**  
-`date | total_in | total_out | net | txn_count`  
 
 ---
 

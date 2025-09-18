@@ -1,0 +1,27 @@
+[
+    {
+        "user_id": 1,
+        "phone_number": "1234567890",
+        "name": "Alice"
+    },
+    {
+        "user_id": 2,
+        "phone_number": "2345678901",
+        "name": "Bob"
+    },
+    {
+        "user_id": 3,
+        "phone_number": "3456789012",
+        "name": "Charlie"
+    },
+    {
+        "user_id": 4,
+        "phone_number": "4567890123",
+        "name": "David"
+    },
+    {
+        "user_id": 5,
+        "phone_number": "5678901234",
+        "name": "Eva"
+    }
+]

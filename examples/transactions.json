@@ -1,0 +1,52 @@
+[
+    {
+        "transaction_id": 1,
+        "receiver_id": 1,
+        "sender_id": 2,
+        "amount": 100.50,
+        "currency": "USD",
+        "transaction_date": "2025-09-19T12:00:00Z",
+        "fee": 1.50,
+        "category_id": 1
+    },
+    {
+        "transaction_id": 2,
+        "receiver_id": 3,
+        "sender_id": 1,
+        "amount": 250.00,
+        "currency": "USD",
+        "transaction_date": "2025-09-19T12:00:00Z",
+        "fee": 2.00,
+        "category_id": 2
+    },
+    {
+        "transaction_id": 3,
+        "receiver_id": 2,
+        "sender_id": 4,
+        "amount": 75.25,
+        "currency": "USD",
+        "transaction_date": "2025-09-19T12:00:00Z",
+        "fee": 0.75,
+        "category_id": 3
+    },
+    {
+        "transaction_id": 4,
+        "receiver_id": 5,
+        "sender_id": 3,
+        "amount": 300.00,
+        "currency": "USD",
+        "transaction_date": "2025-09-19T12:00:00Z",
+        "fee": 3.00,
+        "category_id": 4
+    },
+    {
+        "transaction_id": 5,
+        "receiver_id": 4,
+        "sender_id": 5,
+        "amount": 150.00,
+        "currency": "USD",
+        "transaction_date": "2025-09-19T12:00:00Z",
+        "fee": 1.00,
+        "category_id": 5
+    }
+]

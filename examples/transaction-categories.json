@@ -1,0 +1,27 @@
+[
+    {
+        "category_id": 1,
+        "category_name": "Transfer",
+        "description": "Money transfers"
+    },
+    {
+        "category_id": 2,
+        "category_name": "Bill",
+        "description": "Bill payments"
+    },
+    {
+        "category_id": 3,
+        "category_name": "Purchase",
+        "description": "Goods and services"
+    },
+    {
+        "category_id": 4,
+        "category_name": "Refund",
+        "description": "Refunds"
+    },
+    {
+        "category_id": 5,
+        "category_name": "Donation",
+        "description": "Charity donations"
+    }
+]

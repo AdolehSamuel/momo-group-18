@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Momo Dashboard</title>
     <link rel="stylesheet" href="web/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="sidebar">
@@ -29,10 +28,6 @@
                 <h3>Total Amount</h3>
                 <p id="totalAmount">0</p>
             </div>
-            <div class="card">
-                <h3>High Value TX</h3>
-                <p id="highValueCount">0</p>
-            </div>
         </div>
 
         <div class="filters">
@@ -43,14 +38,6 @@
                 <option value="Medium Value">Medium Value</option>
                 <option value="Low Value">Low Value</option>
             </select>
-
-            <label for="startDate">Start Date:</label>
-            <input type="date" id="startDate">
-
-            <label for="endDate">End Date:</label>
-            <input type="date" id="endDate">
-
-            <button id="applyFilter">Apply</button>
         </div>
 
         <div class="chart-container">
@@ -58,21 +45,26 @@
         </div>
 
         <div class="table-container">
-            <table id="transactionsTable">
+            <table id="transactionTable">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Date</th>
-                        <th>Phone</th>
-                        <th>Type</th>
                         <th>Amount</th>
                         <th>Category</th>
+                        <th>Description</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <!-- Transaction rows will be populated here -->
+                </tbody>
             </table>
         </div>
     </div>
+
+    <footer>
+        <p>&copy; 2025 Momo Dashboard | Built for MoMo SMS Data Analysis</p>
+    </footer>
+
+    <script src="web/chart_handler.js"></script>
 </body>
-<script src="web/chart_handler.js"></script>
 </html>

@@ -21,7 +21,7 @@ def clean_amount(text):
 
 def extract_tx_id(text):
     """
-    Grabs the official Transaction ID (TxId) from the message body.
+    Extracts the official Transaction ID (TxId) from the message body.
     """
     if not text:
         return 'N/A'

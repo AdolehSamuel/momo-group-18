@@ -3,6 +3,8 @@ import re
 import json
 import time
 
+XML_FILENAME = '../modified_sms_v2 (1).xml'
+
 #DATA CLEANING UTILITIES 
 
 def clean_amount(text):
@@ -53,11 +55,12 @@ def get_transaction_type(body):
 
 #2. MAIN DATA LOADING FUNCTION 
 
-def load_data_from_xml(xml_filepath):
+def load_data_from_xml():
     """
     This reads the XML, processes every SMS, and returns a neat list of dictionaries.
     """
-    print(f"--- Loading and preparing data from XML file... ---")
+    xml_filepath = XML_FILENAME
+    print(f"--- Loading and preparing data from XML file : {xml_filepath} ---")
     
     # We use a simple counter ('row_id') as the main API primary key (PK).
     transaction_list = []

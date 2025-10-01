@@ -9,7 +9,7 @@ Process, analyze, and visualize **Mobile Money (MoMo) SMS data** end-to-end. Thi
 - **Blessing Ingabire** – [blessiingab](https://github.com/blessiingab)
 - **Tabitha Dorcas Akimana** – [tdorcas-akim](https://github.com/tdorcas-akim)
 - **Adoleh Samuel** – [AdolehSamuel](https://github.com/AdolehSamuel)
-- **Chibueze Onugha** -[Chibueze Onugha](https://github.com/Nnamdi004)
+
 
 ---
 
@@ -356,3 +356,4 @@ python dsa/search_benchmark.py
 ```
 
 The script prints average timings and the estimated speedup. Ensure at least 20 records are present (the server’s startup population provides this).
+ 
